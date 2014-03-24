@@ -1,0 +1,16 @@
+# Gradle
+/.gradle/
+build/
+gradle.properties
+
+# Eclipse
+.project
+.classpath
+.checkstyle
+.settings/
+bin/
+
+# IDEA
+.idea/
+out/
+*.iml
