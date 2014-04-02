@@ -1,0 +1,16 @@
+apply plugin: 'application'
+
+mainClassName = 'aha.davesgame.messagegenerator.GeneratorMain'
+
+dependencies {
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.2.3'
+    compile 'com.sun.codemodel:codemodel:2.6'
+    compile 'org.yaml:snakeyaml:1.13'
+    compile 'args4j:args4j:2.0.26'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}
