@@ -17,7 +17,8 @@ import com.sun.codemodel.JClassAlreadyExistsException;
  */
 public class GeneratorMain {
 
-    @Option(name = "-d", aliases = "--dest-src-dir", required = true, usage = "Java source folder where the classes will be generated in", metaVar = "DIR")
+    @Option(name = "-d", aliases = "--dest-src-dir", required = true,
+            usage = "source folder for the generated Java sources", metaVar = "DIR")
     private String destSrcDir = ".";
 
     @Argument
