@@ -10,12 +10,12 @@ import com.sun.codemodel.JClassAlreadyExistsException;
 public class Generator {
 
     private final MessageParser parser = new MessageParser();
+    private final CodeGenerator generator;
     private final List<String> definitionFiles;
-    private final String destSrcDir;
 
     public Generator(List<String> definitionFiles, String destSrcDir) {
         this.definitionFiles = definitionFiles;
-        this.destSrcDir = destSrcDir;
+        this.generator = new CodeGenerator(destSrcDir);
     }
 
     public void generateMessages() throws IOException, ParseException, ClassNotFoundException,
@@ -26,9 +26,9 @@ public class Generator {
                 messages = parser.parseDefinitions(stream);
             }
             for (Message message : messages) {
-                CodeGenerator generator = new CodeGenerator(message);
-                generator.generateJavaSource(destSrcDir);
+                generator.addMessage(message);
             }
         }
+        generator.writeSourceFiles();
     }
 }
