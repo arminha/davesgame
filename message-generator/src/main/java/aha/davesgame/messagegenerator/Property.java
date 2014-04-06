@@ -6,6 +6,9 @@ import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.sun.codemodel.JVar;
 
+/**
+ * Defines a property of a message bean.
+ */
 public class Property {
     private final String type;
     private final String name;
@@ -13,6 +16,14 @@ public class Property {
     @Nullable
     private JVar constrParam;
 
+    /**
+     * Constructs a new {@link Property}.
+     * 
+     * @param name
+     *            the property name
+     * @param type
+     *            the property type
+     */
     public Property(String name, String type) {
         this.type = Preconditions.checkNotNull(type);
         this.name = Preconditions.checkNotNull(name);

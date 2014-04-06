@@ -7,6 +7,9 @@ import javax.annotation.Nullable;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
+/**
+ * Defines a message bean.
+ */
 public class Message {
 
     private final String name;
@@ -14,6 +17,18 @@ public class Message {
     private final String iface;
     private final String pkg;
 
+    /**
+     * Construct a new {@link Message}.
+     * 
+     * @param iface
+     *            the marker interface for the message bean
+     * @param pkg
+     *            the Java package for the message bean
+     * @param name
+     *            the name for the message bean
+     * @param properties
+     *            the properties of the message bean
+     */
     public Message(String iface, String pkg, String name, List<Property> properties) {
         this.iface = Preconditions.checkNotNull(iface);
         this.pkg = Preconditions.checkNotNull(pkg);

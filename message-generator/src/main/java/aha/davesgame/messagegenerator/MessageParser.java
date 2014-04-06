@@ -15,6 +15,26 @@ import org.yaml.snakeyaml.Yaml;
 
 import com.google.common.collect.ImmutableSet;
 
+/**
+ * Parses {@link Message} definitions in a YAML format.
+ * <p>
+ * The format is a follows:
+ * <pre>
+ * # The package for the messages in this file
+ * package: com.example.messages
+ * # A marker interface that all messages in this file implement
+ * interface: com.example.messages.Message
+ * 
+ * # A message definition
+ * ExampleMessage:
+ *   property1: int
+ *   property2: String
+ * 
+ * AnotherMessage:
+ *   property3: UUID
+ * [...]
+ * </pre>
+ */
 public class MessageParser {
 
     private static final String PACKAGE = "package";
@@ -23,6 +43,9 @@ public class MessageParser {
 
     private final Map<String, String> typeMap = new HashMap<String, String>();
 
+    /**
+     * Constructs a new {@link MessageParser}.
+     */
     public MessageParser() {
         addToTypeMap(UUID.class);
     }
@@ -43,11 +66,10 @@ public class MessageParser {
     }
 
     /**
-     * Read and parse message definition from an {@link InputStream}.
-     * The stream is not closed.
+     * Read and parse message definitions from an {@link InputStream}. The stream is not closed.
      * 
      * @param stream
-     * @return
+     * @return a list of {@link Message}s
      * @throws ParseException
      *             if a parse error occurs
      */
@@ -57,13 +79,29 @@ public class MessageParser {
         return parseDefinitions(object);
     }
 
+    /**
+     * Parse message definitions given as a {@linkplain String}.
+     * 
+     * @param definitions
+     * @return a list of {@link Message}s
+     * @throws ParseException
+     *             if a parse error occurs
+     */
     public Iterable<Message> parseDefinitions(String definitions) throws ParseException {
         Yaml yaml = new Yaml();
         Object object = yaml.load(definitions);
         return parseDefinitions(object);
     }
 
-    protected Iterable<Message> parseDefinitions(Object yamlObject) throws ParseException {
+    /**
+     * Parse message definitions given as a deserialized Object from {@link Yaml}.
+     * 
+     * @param yamlObject
+     * @return a list of {@link Message}s
+     * @throws ParseException
+     *             if a parse error occurs
+     */
+    protected Iterable<Message> parseDefinitions(@Nullable Object yamlObject) throws ParseException {
         List<Message> messages = new ArrayList<>();
         if (yamlObject != null) {
             Map<String, ?> definitions = checkIsMap(yamlObject);
