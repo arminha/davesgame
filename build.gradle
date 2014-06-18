@@ -71,6 +71,11 @@ subprojects {
         toolVersion = '5.7'
         configFile = rootProject.file('config/checkstyle/checkstyle.xml')
     }
+
+    // different rule file for tests
+    tasks.matching({ task -> task.getName().endsWith("Test")}).withType(Checkstyle) {
+        configFile = rootProject.file('config/checkstyle/checkstyle-test.xml')
+    }
 }
 
 ////////////////
