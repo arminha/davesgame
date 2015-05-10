@@ -32,7 +32,7 @@ subprojects {
     // jacoco
 
     jacoco {
-        toolVersion = '0.7.0.201403182114'
+        toolVersion = '0.7.4.201502262128'
     }
     jacocoTestReport.dependsOn(test)
 }
