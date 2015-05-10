@@ -1,0 +1,27 @@
+
+# Event definitions
+# This is a valid YAML file
+
+interface: arminha.davesgame.domain.event.Event
+package: arminha.davesgame.domain.event
+
+GameCreated:
+  id:       UUID
+  name:     String
+  firstPlayerId: UUID
+  secondPlayerId: UUID
+
+NextStoneChoosen:
+  id:       UUID
+  playerId: UUID
+  stone:    int
+
+StonePut:
+  id:       UUID
+  playerId: UUID
+  x:        int
+  y:        int
+
+Winner:
+  id:       UUID
+  winnerId: UUID

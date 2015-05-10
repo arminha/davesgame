@@ -1,0 +1,23 @@
+
+# Command definitions
+# This is a valid YAML file
+
+interface: arminha.davesgame.domain.command.Command
+package: arminha.davesgame.domain.command
+
+CreateGame:
+  id:             UUID
+  name:           String
+  firstPlayerId:  UUID
+  secondPlayerId: UUID
+
+ChooseNextStone:
+  id:       UUID
+  playerId: UUID
+  stone:    int
+
+PutStone:
+  id:       UUID
+  playerId: UUID
+  x:        int
+  y:        int
