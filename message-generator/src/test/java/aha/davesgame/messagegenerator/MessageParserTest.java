@@ -30,8 +30,28 @@ public class MessageParserTest {
     }
 
     @Test(expected = ParseException.class)
+    public void failEmptyInterface() throws Exception {
+        parser.parseDefinitions("interface: ''\npackage: com.example.target");
+    }
+
+    @Test(expected = ParseException.class)
+    public void failInvalidInterfaceType() throws Exception {
+        parser.parseDefinitions("interface: 1\npackage: com.example.target");
+    }
+
+    @Test(expected = ParseException.class)
     public void failMissingPackage() throws Exception {
         parser.parseDefinitions("interface: com.example.Message");
+    }
+
+    @Test(expected = ParseException.class)
+    public void failEmptyPackage() throws Exception {
+        parser.parseDefinitions("interface: com.example.Message\npackage: ''");
+    }
+
+    @Test(expected = ParseException.class)
+    public void failInvalidPackageType() throws Exception {
+        parser.parseDefinitions("interface: com.example.Message\npackage: 2");
     }
 
     @Test
