@@ -23,20 +23,19 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JType;
 import com.sun.codemodel.JVar;
 
+/**
+ * CodeModel based Java code generator for {@link Message}s.
+ */
 public class CodeGenerator {
 
     private final JCodeModel cm = new JCodeModel();
-    private final String destSrcDir;
-
-    public CodeGenerator(String destSrcDir) {
-        this.destSrcDir = Preconditions.checkNotNull(destSrcDir);
-    }
 
     public void addMessage(Message message) throws JClassAlreadyExistsException, ClassNotFoundException, IOException {
         new MessageGenerator(message);
     }
 
-    public void writeSourceFiles() throws IOException {
+    public void writeSourceFiles(String destSrcDir) throws IOException {
+        Preconditions.checkNotNull(destSrcDir);
         File file = new File(destSrcDir);
         cm.build(file);
     }

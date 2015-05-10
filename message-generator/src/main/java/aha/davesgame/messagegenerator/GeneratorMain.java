@@ -45,7 +45,7 @@ public class GeneratorMain {
         }
 
         try {
-            new Generator(definitionFiles, destSrcDir).generateMessages();
+            new Generator(definitionFiles).generateMessages(destSrcDir);
         } catch (ClassNotFoundException | JClassAlreadyExistsException | IOException | ParseException e) {
             e.printStackTrace();
             System.exit(-1);

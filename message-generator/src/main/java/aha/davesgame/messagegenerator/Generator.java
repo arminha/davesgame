@@ -13,12 +13,12 @@ public class Generator {
     private final CodeGenerator generator;
     private final List<String> definitionFiles;
 
-    public Generator(List<String> definitionFiles, String destSrcDir) {
+    public Generator(List<String> definitionFiles) {
         this.definitionFiles = definitionFiles;
-        this.generator = new CodeGenerator(destSrcDir);
+        this.generator = new CodeGenerator();
     }
 
-    public void generateMessages() throws IOException, ParseException, ClassNotFoundException,
+    public void generateMessages(String destSrcDir) throws IOException, ParseException, ClassNotFoundException,
             JClassAlreadyExistsException {
         for (String file : definitionFiles) {
             Iterable<Message> messages;
@@ -29,6 +29,6 @@ public class Generator {
                 generator.addMessage(message);
             }
         }
-        generator.writeSourceFiles();
+        generator.writeSourceFiles(destSrcDir);
     }
 }
