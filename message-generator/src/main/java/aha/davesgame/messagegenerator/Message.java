@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
@@ -54,7 +55,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).add("name", name).add("interface", iface).add("package", pkg)
+        return MoreObjects.toStringHelper(this).add("name", name).add("interface", iface).add("package", pkg)
                 .add("properties", properties).toString();
     }
 

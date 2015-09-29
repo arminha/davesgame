@@ -2,6 +2,7 @@ package aha.davesgame.messagegenerator;
 
 import javax.annotation.Nullable;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.sun.codemodel.JVar;
@@ -48,7 +49,7 @@ public class Property {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).add("type", type).add("name", name).toString();
+        return MoreObjects.toStringHelper(this).add("type", type).add("name", name).toString();
     }
 
     @Override
