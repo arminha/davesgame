@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.sun.codemodel.JBlock;
@@ -30,10 +31,16 @@ public class CodeGenerator {
 
     private final JCodeModel cm = new JCodeModel();
 
+    /**
+     * Add a {@link Message} to generate code for.
+     */
     public void addMessage(Message message) throws JClassAlreadyExistsException, ClassNotFoundException, IOException {
         new MessageGenerator(message);
     }
 
+    /**
+     * Generate source files into a directory.
+     */
     public void writeSourceFiles(String destSrcDir) throws IOException {
         Preconditions.checkNotNull(destSrcDir);
         File file = new File(destSrcDir);
@@ -95,7 +102,7 @@ public class CodeGenerator {
         private void generateToString() {
             JMethod method = dc.method(JMod.PUBLIC, String.class, "toString");
             method.annotate(Override.class);
-            JInvocation invocation = cm.ref(Objects.class).staticInvoke("toStringHelper").arg(JExpr._this());
+            JInvocation invocation = cm.ref(MoreObjects.class).staticInvoke("toStringHelper").arg(JExpr._this());
             for (Property p : getProperties()) {
                 invocation = invocation.invoke("add").arg(p.getName()).arg(JExpr.ref(p.getName()));
             }

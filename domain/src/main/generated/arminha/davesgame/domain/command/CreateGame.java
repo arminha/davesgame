@@ -5,6 +5,7 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
@@ -51,7 +52,7 @@ public class CreateGame
 
     @Override
     public java.lang.String toString() {
-        return Objects.toStringHelper(this).add("id", id).add("name", name).add("firstPlayerId", firstPlayerId).add("secondPlayerId", secondPlayerId).toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("firstPlayerId", firstPlayerId).add("secondPlayerId", secondPlayerId).toString();
     }
 
     @Override

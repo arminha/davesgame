@@ -2,6 +2,7 @@ package arminha.davesgame.domain;
 
 import javax.annotation.Nullable;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
@@ -46,7 +47,7 @@ public class Stone {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).add("flags", flags).toString();
+        return MoreObjects.toStringHelper(this).add("flags", flags).toString();
     }
 
     @Override

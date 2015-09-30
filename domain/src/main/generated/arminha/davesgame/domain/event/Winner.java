@@ -5,6 +5,7 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
@@ -35,7 +36,7 @@ public class Winner
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).add("id", id).add("winnerId", winnerId).toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("winnerId", winnerId).toString();
     }
 
     @Override
