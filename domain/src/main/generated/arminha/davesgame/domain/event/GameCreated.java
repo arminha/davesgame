@@ -1,13 +1,12 @@
 
 package arminha.davesgame.domain.event;
 
+import java.util.Objects;
 import java.util.UUID;
 import javax.annotation.Nullable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
 
 public class GameCreated
     implements Event
@@ -28,10 +27,10 @@ public class GameCreated
         UUID firstPlayerId,
         @JsonProperty("secondPlayerId")
         UUID secondPlayerId) {
-        this.id = Preconditions.checkNotNull(id);
-        this.name = Preconditions.checkNotNull(name);
-        this.firstPlayerId = Preconditions.checkNotNull(firstPlayerId);
-        this.secondPlayerId = Preconditions.checkNotNull(secondPlayerId);
+        this.id = Objects.requireNonNull(id);
+        this.name = Objects.requireNonNull(name);
+        this.firstPlayerId = Objects.requireNonNull(firstPlayerId);
+        this.secondPlayerId = Objects.requireNonNull(secondPlayerId);
     }
 
     public UUID getId() {
@@ -57,7 +56,7 @@ public class GameCreated
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, name, firstPlayerId, secondPlayerId);
+        return Objects.hash(id, name, firstPlayerId, secondPlayerId);
     }
 
     @Override

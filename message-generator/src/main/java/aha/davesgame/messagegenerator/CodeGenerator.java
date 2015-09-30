@@ -3,14 +3,13 @@ package aha.davesgame.messagegenerator;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
 import com.sun.codemodel.JBlock;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
@@ -42,7 +41,7 @@ public class CodeGenerator {
      * Generate source files into a directory.
      */
     public void writeSourceFiles(String destSrcDir) throws IOException {
-        Preconditions.checkNotNull(destSrcDir);
+        Objects.requireNonNull(destSrcDir);
         File file = new File(destSrcDir);
         cm.build(file);
     }
@@ -53,7 +52,7 @@ public class CodeGenerator {
         private final JDefinedClass dc;
 
         public MessageGenerator(Message message) throws JClassAlreadyExistsException, ClassNotFoundException {
-            this.message = Preconditions.checkNotNull(message);
+            this.message = Objects.requireNonNull(message);
             dc = cm._class(message.getPackage() + "." + message.getName());
 
             JClass iface = cm.directClass(message.getInterface());
@@ -82,7 +81,7 @@ public class CodeGenerator {
             JBlock body = constructor.body();
             for (Property p : getProperties()) {
                 JFieldRef lhs = JExpr.refthis(p.getName());
-                JInvocation invocation = cm.ref(Preconditions.class).staticInvoke("checkNotNull");
+                JInvocation invocation = cm.ref(java.util.Objects.class).staticInvoke("requireNonNull");
                 invocation.arg(p.getConstrParam());
                 body.assign(lhs, invocation);
             }
@@ -134,7 +133,7 @@ public class CodeGenerator {
         private void generateHashCode() {
             JMethod method = dc.method(JMod.PUBLIC, cm.INT, "hashCode");
             method.annotate(Override.class);
-            JInvocation invocation = cm.ref(Objects.class).staticInvoke("hashCode");
+            JInvocation invocation = cm.ref(Objects.class).staticInvoke("hash");
             for (Property p : getProperties()) {
                 invocation.arg(JExpr.ref(p.getName()));
             }

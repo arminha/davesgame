@@ -1,13 +1,12 @@
 
 package arminha.davesgame.domain.command;
 
+import java.util.Objects;
 import java.util.UUID;
 import javax.annotation.Nullable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
 
 public class ChooseNextStone
     implements Command
@@ -25,9 +24,9 @@ public class ChooseNextStone
         UUID playerId,
         @JsonProperty("stone")
         int stone) {
-        this.id = Preconditions.checkNotNull(id);
-        this.playerId = Preconditions.checkNotNull(playerId);
-        this.stone = Preconditions.checkNotNull(stone);
+        this.id = Objects.requireNonNull(id);
+        this.playerId = Objects.requireNonNull(playerId);
+        this.stone = Objects.requireNonNull(stone);
     }
 
     public UUID getId() {
@@ -49,7 +48,7 @@ public class ChooseNextStone
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, playerId, stone);
+        return Objects.hash(id, playerId, stone);
     }
 
     @Override

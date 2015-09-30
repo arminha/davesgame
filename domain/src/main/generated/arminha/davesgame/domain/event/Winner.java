@@ -1,13 +1,12 @@
 
 package arminha.davesgame.domain.event;
 
+import java.util.Objects;
 import java.util.UUID;
 import javax.annotation.Nullable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
 
 public class Winner
     implements Event
@@ -22,8 +21,8 @@ public class Winner
         UUID id,
         @JsonProperty("winnerId")
         UUID winnerId) {
-        this.id = Preconditions.checkNotNull(id);
-        this.winnerId = Preconditions.checkNotNull(winnerId);
+        this.id = Objects.requireNonNull(id);
+        this.winnerId = Objects.requireNonNull(winnerId);
     }
 
     public UUID getId() {
@@ -41,7 +40,7 @@ public class Winner
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, winnerId);
+        return Objects.hash(id, winnerId);
     }
 
     @Override

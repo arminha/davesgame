@@ -1,13 +1,12 @@
 
 package arminha.davesgame.domain.event;
 
+import java.util.Objects;
 import java.util.UUID;
 import javax.annotation.Nullable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
 
 public class StonePut
     implements Event
@@ -28,10 +27,10 @@ public class StonePut
         int x,
         @JsonProperty("y")
         int y) {
-        this.id = Preconditions.checkNotNull(id);
-        this.playerId = Preconditions.checkNotNull(playerId);
-        this.x = Preconditions.checkNotNull(x);
-        this.y = Preconditions.checkNotNull(y);
+        this.id = Objects.requireNonNull(id);
+        this.playerId = Objects.requireNonNull(playerId);
+        this.x = Objects.requireNonNull(x);
+        this.y = Objects.requireNonNull(y);
     }
 
     public UUID getId() {
@@ -57,7 +56,7 @@ public class StonePut
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, playerId, x, y);
+        return Objects.hash(id, playerId, x, y);
     }
 
     @Override
