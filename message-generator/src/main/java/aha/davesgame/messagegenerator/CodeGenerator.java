@@ -1,5 +1,13 @@
 package aha.davesgame.messagegenerator;
 
+import static com.sun.codemodel.JExpr.FALSE;
+import static com.sun.codemodel.JExpr.TRUE;
+import static com.sun.codemodel.JExpr._null;
+import static com.sun.codemodel.JExpr._this;
+import static com.sun.codemodel.JExpr.cast;
+import static com.sun.codemodel.JExpr.ref;
+import static com.sun.codemodel.JExpr.refthis;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +23,6 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldRef;
 import com.sun.codemodel.JInvocation;
 import com.sun.codemodel.JMethod;
@@ -80,7 +87,7 @@ public class CodeGenerator {
             }
             JBlock body = constructor.body();
             for (Property p : getProperties()) {
-                JFieldRef lhs = JExpr.refthis(p.getName());
+                JFieldRef lhs = refthis(p.getName());
                 JInvocation invocation = cm.ref(java.util.Objects.class).staticInvoke("requireNonNull");
                 invocation.arg(p.getConstrParam());
                 body.assign(lhs, invocation);
@@ -95,15 +102,15 @@ public class CodeGenerator {
             String getterName = "get" + p.getName().substring(0, 1).toUpperCase() + p.getName().substring(1);
             JMethod getter = dc.method(JMod.PUBLIC, getType(p.getType()), getterName);
             JBlock body = getter.body();
-            body._return(JExpr.ref(p.getName()));
+            body._return(ref(p.getName()));
         }
 
         private void generateToString() {
             JMethod method = dc.method(JMod.PUBLIC, String.class, "toString");
             method.annotate(Override.class);
-            JInvocation invocation = cm.ref(MoreObjects.class).staticInvoke("toStringHelper").arg(JExpr._this());
+            JInvocation invocation = cm.ref(MoreObjects.class).staticInvoke("toStringHelper").arg(_this());
             for (Property p : getProperties()) {
-                invocation = invocation.invoke("add").arg(p.getName()).arg(JExpr.ref(p.getName()));
+                invocation = invocation.invoke("add").arg(p.getName()).arg(ref(p.getName()));
             }
             method.body()._return(invocation.invoke("toString"));
         }
@@ -115,19 +122,19 @@ public class CodeGenerator {
             param.annotate(Nullable.class);
             JBlock body = method.body();
 
-            body._if(JExpr._this().eq(param))._then()._return(JExpr.TRUE);
-            body._if(param.eq(JExpr._null()))._then()._return(JExpr.FALSE);
-            body._if(param._instanceof(dc).not())._then()._return(JExpr.FALSE);
-            JVar other = body.decl(dc, "other").init(JExpr.cast(dc, param));
+            body._if(_this().eq(param))._then()._return(TRUE);
+            body._if(param.eq(_null()))._then()._return(FALSE);
+            body._if(param._instanceof(dc).not())._then()._return(FALSE);
+            JVar other = body.decl(dc, "other").init(cast(dc, param));
             for (Property p : getProperties()) {
                 if (isPrimitive(p)) {
-                    body._if(JExpr.ref(p.getName()).ne(other.ref(p.getName())))._then()._return(JExpr.FALSE);
+                    body._if(ref(p.getName()).ne(other.ref(p.getName())))._then()._return(FALSE);
                 } else {
-                    body._if(JExpr.ref(p.getName()).invoke("equals").arg(other.ref(p.getName())).not())._then()
-                            ._return(JExpr.FALSE);
+                    body._if(ref(p.getName()).invoke("equals").arg(other.ref(p.getName())).not())._then()
+                            ._return(FALSE);
                 }
             }
-            body._return(JExpr.TRUE);
+            body._return(TRUE);
         }
 
         private void generateHashCode() {
@@ -135,7 +142,7 @@ public class CodeGenerator {
             method.annotate(Override.class);
             JInvocation invocation = cm.ref(Objects.class).staticInvoke("hash");
             for (Property p : getProperties()) {
-                invocation.arg(JExpr.ref(p.getName()));
+                invocation.arg(ref(p.getName()));
             }
             method.body()._return(invocation);
         }
