@@ -4,8 +4,8 @@ import arminha.davesgame.domain.command.Command;
 
 public interface CommandHandler {
 
-    Class<? extends Command> getCommandClass();
+  Class<? extends Command> getCommandClass();
 
-    void execute(Command command);
+  void execute(Command command);
 
 }

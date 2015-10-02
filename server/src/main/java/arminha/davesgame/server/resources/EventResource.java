@@ -1,8 +1,8 @@
 package arminha.davesgame.server.resources;
 
-import javax.ws.rs.Path;
-
 import org.springframework.stereotype.Component;
+
+import javax.ws.rs.Path;
 
 @Component
 @Path("events")
