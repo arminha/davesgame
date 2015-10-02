@@ -1,4 +1,4 @@
-package aha.davesgame.messagegenerator;
+package arminha.davesgame.messagegenerator;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

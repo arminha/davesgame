@@ -1,4 +1,4 @@
-package aha.davesgame.messagegenerator;
+package arminha.davesgame.messagegenerator;
 
 import com.sun.codemodel.JClassAlreadyExistsException;
 

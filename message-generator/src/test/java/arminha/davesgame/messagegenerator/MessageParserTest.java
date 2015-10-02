@@ -1,4 +1,4 @@
-package aha.davesgame.messagegenerator;
+package arminha.davesgame.messagegenerator;
 
 import static org.hamcrest.collection.IsEmptyIterable.emptyIterable;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;

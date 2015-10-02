@@ -1,4 +1,4 @@
-package aha.davesgame.messagegenerator;
+package arminha.davesgame.messagegenerator;
 
 import static com.sun.codemodel.JExpr.FALSE;
 import static com.sun.codemodel.JExpr.TRUE;

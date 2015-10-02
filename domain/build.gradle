@@ -26,7 +26,7 @@ checkstyleMain.source = "src/main/java"
 task generateMessages(type: JavaExec) {
     description = 'Generate Java source for message definitions'
     classpath = configurations.generator
-    main = 'aha.davesgame.messagegenerator.GeneratorMain'
+    main = 'arminha.davesgame.messagegenerator.GeneratorMain'
     def definitionFiles = files { file('src/main/messages').listFiles() }
     args = ['-d', 'src/main/generated'] + definitionFiles.collect { relativePath(it) }
     inputs.files definitionFiles

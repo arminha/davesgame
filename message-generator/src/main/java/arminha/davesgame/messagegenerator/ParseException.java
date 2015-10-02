@@ -1,4 +1,4 @@
-package aha.davesgame.messagegenerator;
+package arminha.davesgame.messagegenerator;
 
 /**
  * Indicates that a message definition file cannot be parsed.

@@ -1,6 +1,6 @@
 apply plugin: 'application'
 
-mainClassName = 'aha.davesgame.messagegenerator.GeneratorMain'
+mainClassName = 'arminha.davesgame.messagegenerator.GeneratorMain'
 
 dependencies {
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.5.4'
