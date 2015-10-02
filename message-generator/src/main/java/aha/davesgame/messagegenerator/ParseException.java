@@ -5,16 +5,16 @@ package aha.davesgame.messagegenerator;
  */
 public class ParseException extends Exception {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a {@linkplain ParseException} with the specified detail message.
-     * 
-     * @param message
-     *            the detail message
-     */
-    public ParseException(String message) {
-        super(message);
-    }
+  /**
+   * Constructs a {@linkplain ParseException} with the specified detail message.
+   * 
+   * @param message
+   *          the detail message
+   */
+  public ParseException(String message) {
+    super(message);
+  }
 
 }
