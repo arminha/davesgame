@@ -10,6 +10,10 @@ buildscript {
 
 apply plugin: 'spring-boot'
 
+configurations {
+	all*.exclude group:'commons-logging', module:'commons-logging'
+}
+
 dependencies {
     compile project(':davesgame-domain')
 
