@@ -112,6 +112,17 @@ project('davesgame-rest') {
   }
 }
 
+project('davesgame-userdb') {
+  dependencies {
+    compile project(':davesgame-authenticate')
+    compile 'org.eclipse.persistence:javax.persistence:2.1.0'
+    compile 'javax.validation:validation-api:1.1.0.Final'
+
+    testRuntime 'org.eclipse.persistence:eclipselink:2.6.1'
+    testRuntime 'com.h2database:h2:1.4.190'
+  }
+}
+
 project('davesgame-server') {
   apply plugin: 'spring-boot'
 
