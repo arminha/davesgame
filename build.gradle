@@ -100,6 +100,18 @@ project('davesgame-domain') {
 project('davesgame-authenticate') {
 }
 
+project('davesgame-rest') {
+  dependencies {
+    compile project(':davesgame-authenticate')
+    compile 'com.google.guava:guava:18.0'
+    compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
+    compile 'javax.annotation:javax.annotation-api:1.2'
+    compile 'commons-codec:commons-codec:1.10'
+
+    testRuntime 'org.glassfish.jersey.core:jersey-common:2.22'
+  }
+}
+
 project('davesgame-server') {
   apply plugin: 'spring-boot'
 

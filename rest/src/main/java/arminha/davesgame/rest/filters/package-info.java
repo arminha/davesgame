@@ -1,2 +1,2 @@
 @javax.annotation.ParametersAreNonnullByDefault
-package arminha.davesgame.server.filters;
+package arminha.davesgame.rest.filters;

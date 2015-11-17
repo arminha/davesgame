@@ -1,4 +1,4 @@
-package arminha.davesgame.server.filters;
+package arminha.davesgame.rest.filters;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.HttpHeaders;

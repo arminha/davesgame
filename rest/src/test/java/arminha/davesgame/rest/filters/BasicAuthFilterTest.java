@@ -1,4 +1,4 @@
-package arminha.davesgame.server.filters;
+package arminha.davesgame.rest.filters;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.eq;

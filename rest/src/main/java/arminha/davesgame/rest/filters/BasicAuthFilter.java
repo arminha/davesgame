@@ -1,4 +1,4 @@
-package arminha.davesgame.server.filters;
+package arminha.davesgame.rest.filters;
 
 import arminha.davesgame.authenticate.AuthenticationService;
 import arminha.davesgame.authenticate.User;
@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.annotation.Priority;
-import javax.inject.Inject;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.PreMatching;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.SecurityContext;
@@ -38,8 +38,7 @@ public class BasicAuthFilter implements ContainerRequestFilter {
 
   private String realm = "Test";
 
-  @Inject
-  public BasicAuthFilter(AuthenticationService authentication) {
+  public BasicAuthFilter(@Context AuthenticationService authentication) {
     this.authentication = Objects.requireNonNull(authentication);
   }
 
