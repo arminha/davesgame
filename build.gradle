@@ -97,6 +97,9 @@ project('davesgame-domain') {
   compileJava.dependsOn(generateMessages)
 }
 
+project('davesgame-authenticate') {
+}
+
 project('davesgame-server') {
   apply plugin: 'spring-boot'
 
@@ -106,6 +109,7 @@ project('davesgame-server') {
 
   dependencies {
     compile project(':davesgame-domain')
+    compile project(':davesgame-authenticate')
 
     compile("org.springframework.boot:spring-boot-starter-jersey") {
       exclude module: 'spring-boot-starter-tomcat'

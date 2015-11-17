@@ -1,19 +1,21 @@
 package arminha.davesgame.server.auth;
 
-import java.security.Principal;
+import arminha.davesgame.authenticate.User;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class User implements Principal {
+public class DummyUser implements User {
 
   private final String name;
-
+  private final String id;
   private final Set<String> groups;
 
-  public User(String name, Collection<String> groups) {
+  public DummyUser(String name, String id, Collection<String> groups) {
     this.name = Objects.requireNonNull(name);
+    this.id = Objects.requireNonNull(id);
     this.groups = new HashSet<>(groups);
   }
 
@@ -22,6 +24,12 @@ public class User implements Principal {
     return name;
   }
 
+  @Override
+  public String getId() {
+    return id;
+  }
+
+  @Override
   public boolean isGroupMember(String group) {
     return groups.contains(group);
   }

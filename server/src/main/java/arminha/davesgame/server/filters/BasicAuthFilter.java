@@ -1,7 +1,7 @@
 package arminha.davesgame.server.filters;
 
-import arminha.davesgame.server.auth.AuthenticationService;
-import arminha.davesgame.server.auth.User;
+import arminha.davesgame.authenticate.AuthenticationService;
+import arminha.davesgame.authenticate.User;
 
 import com.google.common.base.Splitter;
 

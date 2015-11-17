@@ -1,5 +1,6 @@
 rootProject.name = 'davesgame'
 include 'domain'
+include 'authenticate'
 include 'server'
 rootProject.children.each { it.name = rootProject.name + '-' + it.name }
 include 'message-generator'

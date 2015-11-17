@@ -6,8 +6,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import arminha.davesgame.server.auth.AuthenticationService;
-import arminha.davesgame.server.auth.User;
+import arminha.davesgame.authenticate.AuthenticationService;
+import arminha.davesgame.authenticate.User;
 
 import org.apache.commons.codec.binary.Base64;
 import org.junit.Before;
