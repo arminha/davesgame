@@ -66,7 +66,7 @@ public class BasicAuthFilter implements ContainerRequestFilter {
     requestContext.setSecurityContext(new UserSecurityContext(user));
   }
 
-  private final static class UserSecurityContext implements SecurityContext {
+  private static final class UserSecurityContext implements SecurityContext {
 
     private final User user;
 
