@@ -21,7 +21,6 @@ subprojects {
 
   dependencies {
     compile 'com.google.code.findbugs:jsr305:3.0.0'
-    compile 'com.google.guava:guava:18.0'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
@@ -46,6 +45,7 @@ project('message-generator') {
   mainClassName = 'arminha.davesgame.messagegenerator.GeneratorMain'
 
   dependencies {
+    compile 'com.google.guava:guava:18.0'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.5.4'
     compile 'com.sun.codemodel:codemodel:2.6'
     compile 'org.yaml:snakeyaml:1.14'
@@ -65,6 +65,7 @@ project('davesgame-domain') {
   }
 
   dependencies {
+    compile 'com.google.guava:guava:18.0'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.5.4'
 
     generator project(':message-generator')
