@@ -117,9 +117,12 @@ project('davesgame-userdb') {
     compile project(':davesgame-authenticate')
     compile 'org.eclipse.persistence:javax.persistence:2.1.0'
     compile 'javax.validation:validation-api:1.1.0.Final'
+    compile 'com.google.guava:guava:18.0'
+    compile 'org.slf4j:slf4j-api:1.7.13'
 
     testRuntime 'org.eclipse.persistence:eclipselink:2.6.1'
     testRuntime 'com.h2database:h2:1.4.190'
+    testRuntime 'org.slf4j:slf4j-simple:1.7.13'
   }
 }
 
