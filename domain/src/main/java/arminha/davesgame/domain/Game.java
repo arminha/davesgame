@@ -15,7 +15,7 @@ public class Game extends AggregateRoot {
 
   private UUID id = NULL_ID;
   private final List<UUID> players = new ArrayList<>();
-  private UUID currentPlayerID = NULL_ID;
+  private UUID currentPlayerId = NULL_ID;
   private Optional<Stone> nextStone = Optional.absent();
   private final Board board = new Board();
 
@@ -33,7 +33,7 @@ public class Game extends AggregateRoot {
 
   public void chooseNextStone(UUID playerId, Stone stone) throws InvalidPlayerException,
       DuplicateStoneException {
-    if (!currentPlayerID.equals(playerId)) {
+    if (!currentPlayerId.equals(playerId)) {
       throw new InvalidPlayerException();
     }
     if (board.isUsed(stone)) {
@@ -44,7 +44,7 @@ public class Game extends AggregateRoot {
 
   public void putStone(UUID playerId, int x, int y) throws InvalidPlayerException,
       NoStoneSelectedException, InvalidLocationException {
-    if (!currentPlayerID.equals(playerId)) {
+    if (!currentPlayerId.equals(playerId)) {
       throw new InvalidPlayerException();
     }
     if (!nextStone.isPresent()) {
@@ -59,33 +59,33 @@ public class Game extends AggregateRoot {
 
   private void checkWinner() {
     if (board.hasWinner()) {
-      applyChange(new Winner(id, currentPlayerID));
+      applyChange(new Winner(id, currentPlayerId));
     }
   }
 
   @SuppressWarnings("unused")
-  private void apply(GameCreated e) {
-    id = e.getId();
-    currentPlayerID = e.getFirstPlayerId();
-    players.add(e.getFirstPlayerId());
-    players.add(e.getSecondPlayerId());
+  private void apply(GameCreated event) {
+    id = event.getId();
+    currentPlayerId = event.getFirstPlayerId();
+    players.add(event.getFirstPlayerId());
+    players.add(event.getSecondPlayerId());
   }
 
   @SuppressWarnings("unused")
-  private void apply(NextStoneChoosen e) {
-    int ind = players.indexOf(currentPlayerID);
-    currentPlayerID = players.get((ind + 1) % 2);
-    nextStone = Optional.of(new Stone(e.getStone()));
+  private void apply(NextStoneChoosen event) {
+    int ind = players.indexOf(currentPlayerId);
+    currentPlayerId = players.get((ind + 1) % 2);
+    nextStone = Optional.of(new Stone(event.getStone()));
   }
 
   @SuppressWarnings("unused")
-  private void apply(StonePut e) {
-    board.put(nextStone.get(), e.getX(), e.getY());
+  private void apply(StonePut event) {
+    board.put(nextStone.get(), event.getX(), event.getY());
     nextStone = Optional.absent();
   }
 
   @SuppressWarnings("unused")
-  private void apply(Winner e) {
+  private void apply(Winner event) {
     // TODO Auto-generated method stub
 
   }
