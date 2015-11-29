@@ -1,6 +1,6 @@
 package arminha.davesgame.server.handlers;
 
-import arminha.davesgame.domain.command.Command;
+import arminha.davesgame.domain.Game;
 import arminha.davesgame.domain.command.CreateGame;
 
 import org.slf4j.Logger;
@@ -9,27 +9,23 @@ import org.springframework.stereotype.Component;
 
 import java.security.Principal;
 
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.SecurityContext;
+import javax.inject.Inject;
 
 @Component
-public class CreateGameHandler implements CommandHandler {
+public class CreateGameHandler extends TypeSafeCommandHandler<CreateGame> {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(CreateGameHandler.class);
 
-  @Context
-  private SecurityContext securityContext;
-
-  @Override
-  public Class<? extends Command> getCommandClass() {
-    return CreateGame.class;
+  @Inject
+  public CreateGameHandler(GameRepository repository) {
+    super(CreateGame.class, repository);
   }
 
   @Override
-  public void execute(Command command, Principal principal) {
-    CreateGame create = (CreateGame) command;
-    LOGGER.info(create.toString());
-    LOGGER.info(principal != null ? principal.toString() : "");
+  protected void executeTypeSafe(CreateGame command, Principal principal) {
+    LOGGER.debug(command.toString());
+    Game game = new Game(command.getId(), command.getName(), command.getFirstPlayerId(),
+        command.getSecondPlayerId());
+    getRepository().save(game);
   }
-
 }
